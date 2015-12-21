@@ -33,12 +33,16 @@ var webpackConfig = {
       {test: /\.json$/, loader: "json-loader"},
       {test: /\.css$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules")},
       {test: /\.styl$/, loader: ExtractTextPlugin.extract("style-loader", "css-loader?modules!stylus-loader")},
-      {test: /\.png/, loader: "file-loader?mimetype=image/png"},
-      {test: /\.jpg/, loader: "file"},
-      {test: /\.gif/, loader: "file"},
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+          "file",
+          "image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=true&progressive=true"
+        ]
+      },
       {test: /\.mp3/, loader: "file"},
       {test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader?mimetype=application/font-woff"},
-      {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"}
+      {test: /\.(ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"}
     ]
   },
   resolve: {
