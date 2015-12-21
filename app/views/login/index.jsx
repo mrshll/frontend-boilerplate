@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import _                  from "lodash";
 import {connect}          from "react-redux";
 
-import Login              from "app/views/auth/login";
+import Login              from "app/views/login/login";
 import {authenticate}     from "app/auth/actions";
 import {isTokenSet}       from "app/auth/auth_token";
 

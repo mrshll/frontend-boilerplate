@@ -1,8 +1,14 @@
 var webpack               = require("webpack");
 var WebpackNotifierPlugin = require("webpack-notifier");
-var HtmlWebpackPlugin     = require('html-webpack-plugin');
-var ExtractTextPlugin     = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin     = require("html-webpack-plugin");
+var ExtractTextPlugin     = require("extract-text-webpack-plugin");
 var path                  = require("path");
+
+babelOptions = {
+  cacheDirectory: true,
+  presets: ["es2015", "stage-0", "react"],
+  plugins: ["transform-decorators-legacy"]
+}
 
 var webpackConfig = {
   entry: {
@@ -33,7 +39,14 @@ var webpackConfig = {
       // IMPORTANT: we don"t want to process EVERY single JS file with babel
       // loader. We only want to process the files inside our app structure
       // otherwise this could get very slow or even fail.
-      {test: /\.jsx?$/, exclude: /node_modules/, loaders: ["react-hot-loader", "babel-loader?optional=runtime&stage=0"]},
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loaders: [
+          "react-hot-loader",
+          "babel-loader?" + JSON.stringify(babelOptions)
+        ],
+      },
 
       {test: /\.json$/, loader: "json-loader"},
       {test: /\.css$/,  loader: "style-loader!css-loader?modules"},
